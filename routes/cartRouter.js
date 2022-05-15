@@ -3,8 +3,8 @@ import { Router } from "express";
 import { getUser } from "../middlewares/userMiddleware.js";
 
 import {
-   addProductToCart,
-   getProductsCart,
+	addProductToCart,
+	getProductsCart,
 } from "../controllers/cartController.js";
 
 const cartRouter = Router();
