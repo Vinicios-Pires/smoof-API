@@ -1,8 +1,10 @@
 import db from "../db.js";
 
 export default async function getProducts(req, res) {
+   const limit = parseInt(req.query.limit)
+
    try {
-      const products = await db.collection("products").find().toArray()
+      const products = await db.collection("products").find().limit(10).toArray()
 
       return res.send(products);
    } catch (e) {
