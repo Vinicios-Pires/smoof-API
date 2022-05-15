@@ -2,7 +2,7 @@ import db from "../db.js";
 
 export async function addProductToCart(req, res) {
 	const { user } = res.locals;
-
+	
 	try {
 		const { name, size, price, media } = req.body;
 		await db.collection("cart").insertOne({
