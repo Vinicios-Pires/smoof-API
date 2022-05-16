@@ -34,3 +34,15 @@ export async function getProductsCart(req, res) {
 		res.sendStatus(500);
 	}
 }
+
+export async function finish(req, res) {
+	const { user } = res.locals;
+
+	try {
+		await db.collection("cart").deleteMany({ userId: user._id });
+		res.sendStatus(200);
+	} catch (e) {
+		console.log(e);
+		return res.sendStatus(500);
+	}
+}
