@@ -5,14 +5,19 @@ export async function addProductToCart(req, res) {
 
 	try {
 		const { _id } = req.body;
-		const product = await db.collection("products").findOne(_id);
+		const product = await db.
+		collection("products").findOne({_id});
+		console.log(product)
 		await db.collection("cart").insertOne({
 			productId: product._id,
+			name: product.name,
+			category: product.category,
+			price: product.price,
+			media: product.media,
 			userId: user._id,
 		});
 		res.sendStatus(201);
 	} catch (e) {
-		console.log(product);
 		console.log("Error adding product to cart.");
 		console.log(e);
 		return res.sendStatus(500);
