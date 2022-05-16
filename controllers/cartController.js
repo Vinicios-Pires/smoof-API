@@ -2,18 +2,17 @@ import db from "../db.js";
 
 export async function addProductToCart(req, res) {
 	const { user } = res.locals;
-	
+
 	try {
-		const { name, size, price, media } = req.body;
+		const { _id } = req.body;
+		const product = await db.collection("products").findOne(_id);
 		await db.collection("cart").insertOne({
-			name,
-			size,
-			price,
-			media,
+			productId: product._id,
 			userId: user._id,
 		});
 		res.sendStatus(201);
 	} catch (e) {
+		console.log(product);
 		console.log("Error adding product to cart.");
 		console.log(e);
 		return res.sendStatus(500);
